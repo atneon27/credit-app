@@ -1,0 +1,20 @@
+{
+  "name": "credit-app-backend",
+  "version": "1.0.0",
+  "description": "a simple Node + Express + TS backend for credit app demo",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc --b && node dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@types/express": "^5.0.1",
+    "@types/node": "^22.15.3",
+    "cors": "^2.8.5",
+    "express": "^5.1.0"
+  }
+}
