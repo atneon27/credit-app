@@ -4,7 +4,6 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
-
 const UserOptionsToggle = () => {
     const [activeIdx, setActiveIdx] = useState<number>(1);
 

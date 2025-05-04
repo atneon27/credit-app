@@ -63,9 +63,12 @@ const LoanForm = () => {
 
     return (
         <Form {...form}>
-        <form onSubmit={form.handleSubmit(onFormSubmit)} className="space-y-8">
-            <div className="flex flex-row gap-4 w-full">
-                <div className="flex flex-col gap-4 w-full">
+        <form onSubmit={form.handleSubmit(onFormSubmit)} className="space-y-8 p-10">
+            <div className="text-xl font-bold my-5">
+                APPLY FOR LOAN
+            </div>
+            <div className="flex flex-row gap-16 w-full">
+                <div className="flex flex-col gap-8 w-full">
                     <FormField
                         control={form.control}
                         name="fullname"
@@ -109,14 +112,14 @@ const LoanForm = () => {
                             <FormItem>
                                 <FormLabel>Reason for Loan</FormLabel>
                                 <FormControl>
-                                    <Textarea className="py-5 min-h-32" placeholder="Reason for Loan" {...field} />
+                                    <Textarea className="py-5 min-h-40" placeholder="Reason for Loan" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
                         )}
                     />
                 </div>
-                <div className="flex flex-col gap-4 w-full">
+                <div className="flex flex-col gap-8 w-full">
                     <FormField
                         control={form.control}
                         name="loan_amount"
@@ -179,7 +182,7 @@ const LoanForm = () => {
                             <Checkbox
                             checked={field.value}
                             onCheckedChange={field.onChange}
-                            className="rounded-full data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
+                            className="rounded-full data-[state=checked]:bg-green-500 data-[state=checked]:text-white cursor-pointer"
                             />
                         </FormControl>
                         <div className="space-y-1 leading-none">
@@ -202,12 +205,12 @@ const LoanForm = () => {
                             <Checkbox
                             checked={field.value}
                             onCheckedChange={field.onChange}
-                            className="rounded-full data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
+                            className="rounded-full data-[state=checked]:bg-green-500 data-[state=checked]:text-white cursor-pointer"
                             />
                         </FormControl>
                         <div className="space-y-1 leading-none">
                             <FormLabel>
-                            Any personal and credit information obtained may be disclosed from time to time to other lenders, credit bureaus or other credit reporting agencies.
+                                Any personal and credit information obtained may be disclosed from time to time to other lenders, credit bureaus or other credit reporting agencies.
                             </FormLabel>
                         </div>
                         </FormItem>
@@ -216,7 +219,7 @@ const LoanForm = () => {
             </div>
 
             <div className="flex justify-end">
-                <Button className="cursor-pointer bg-green-1050 hover:bg-green-2000 font-semibold" type="submit">Submit</Button>
+                <Button className="cursor-pointer bg-green-500 hover:bg-green-600 font-semibold" type="submit">Submit</Button>
             </div>
         </form>
         </Form>

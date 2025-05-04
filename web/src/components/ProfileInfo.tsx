@@ -23,19 +23,19 @@ const ProfileInfo = () => {
     return (
         <div className="flex flex-row items-center gap-4">
             <div className="relative">
-                <Bell className="w-7 h-7 fill-green-600 stroke-green-600 cursor-pointer" />
+                <Bell className={`w-7 h-7 fill-green-600 stroke-green-600 cursor-pointer  ${profile === 'user' ? 'opacity-[70%]' : ''}`} />
                 <span className="absolute -top-1 -right-1 bg-red-700 text-white text-[10px] font-bold px-1.5 rounded-full">
                 4
                 </span>
             </div>
 
-            <MessageCircleMoreIcon className="w-8 h-8 fill-green-600 stroke-white cursor-pointer" />
+            <MessageCircleMoreIcon className={`w-8 h-8 fill-green-600 stroke-white cursor-pointer ${profile === 'user' ? 'opacity-[70%]' : ''}`} />
 
-            <CircleUserRoundIcon className="w-7 h-7 stroke-green-600 cursor-pointer" />
+            <CircleUserRoundIcon className={`w-7 h-7 stroke-green-600 cursor-pointer ${profile === 'user' ? 'opacity-[70%]' : ''}`} />
 
             <DropdownMenu>
             <DropdownMenuTrigger className="cursor-pointer focus:outline-none">
-                <div className="flex flex-row items-center gap-2 text-green-600 font-bold">
+                <div className={`flex flex-row items-center gap-2 text-green-600 font-bold ${profile === 'user' ? 'opacity-[70%]' : ''}`}>
                     {profile.charAt(0).toUpperCase() + profile.slice(1)}
                     <ChevronDown className="w-4 h-4 stroke-green-600" />
                 </div>

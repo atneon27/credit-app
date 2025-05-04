@@ -4,12 +4,10 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --color-green-500: #bde01f;
-  --color-green-600: #4d8067;
-  --color-green-800: #0a512f;
-  --color-green-1000: #25372a;
-  --color-green-1050: #132e1a;
-  --color-green-2000: #6b9908;
+  --color-green-400: #ADCF1A; 
+  --color-green-500: #6B9908;
+  --color-green-600: #0A512F;
+  --color-green-700: #132E1A;
 }
 
 @theme inline {

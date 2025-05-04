@@ -1,5 +1,4 @@
-import { Calendar, Settings, Users, FileText, Lock, PiggyBank, DollarSign, PenTool, Briefcase, LogOut, BarChart3, Scale, Calculator, RefreshCw, Banknote } from "lucide-react"
-
+import { Calendar, Settings, Users, FileText, Lock, PiggyBank, DollarSign, PenTool, Briefcase, LogOut, BarChart3, Scale, Calculator, RefreshCw, Banknote, UserRoundIcon } from "lucide-react"
 import {
   Sidebar,
   SidebarContent,
@@ -107,20 +106,21 @@ export function AppSidebar() {
     }
   }, [profile])
 
-  return <Sidebar className="w-56 top-12 h-[calc(100vh-3rem)] fixed">
-      <SidebarContent className="bg-green-1050 text-white h-full">
+  return (
+    <Sidebar className="w-[230px] top-[70px] h-[calc(100vh-3rem)] fixed">
+      <SidebarContent className="bg-green-700 text-white h-full">
         <SidebarGroup>
-          <div className="p-6 flex items-center gap-3 border-b border-green-1000 shadow-sm shadow-gray-950">
-            <div className="bg-green-500 rounded-full w-8 h-8 flex items-center justify-center">
-              <Users className="h-5 w-5 text-white" />
+          <div className="p-6 flex items-center gap-3 border-b border-green-700 shadow-md shadow-gray-900">
+            <div className="bg-green-400 rounded-full w-8 h-8 flex items-center justify-center">
+              <UserRoundIcon className="h-5 w-5 text-white" />
             </div>
-            <span className="font-semibold text-green-500">John Okoh</span>
+            <span className="font-semibold text-green-400">John Okoh</span>
           </div>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (
-                <SidebarMenuItem className="h-12 flex justify-center items-center shadow-sm shadow-gray-900 hover:bg-green-900" key={item.title}>
-                  <SidebarMenuButton className="hover:bg-green-900 hover:text-white" asChild>
+                <SidebarMenuItem className="h-12 flex justify-center items-center shadow-sm shadow-gray-900 hover:bg-green-600" key={item.title}>
+                  <SidebarMenuButton className="hover:bg-green-600 hover:opacity-[91%] hover:text-white" asChild>
                     <a href={item.url} className="flex items-center gap-3 text-white">
                       <item.icon className="h-5 w-5" />
                       <span className="font-semibold text-md">{item.title}</span>
@@ -133,6 +133,7 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
     </Sidebar>
+  )
 }
 
 export default AppSidebar;
