@@ -21,77 +21,77 @@ const items = [
   },
   {
     title: "Borrowers",
-    url: "/under-construction",
+    url: "#",
     icon: Users,
   },
   {
     title: "Loans",
-    url: "/under-construction",
+    url: "#",
     icon: Banknote,
   },
   {
     title: "Repayments",
-    url: "/under-construction",
+    url: "#",
     icon: RefreshCw,
   },
   {
     title: "Loan Parameters",
-    url: "/under-construction",
+    url: "#",
     icon: Scale,
   },
   {
     title: "Accounting",
-    url: "/under-construction",
+    url: "#",
     icon: Calculator,
   },
   {
     title: "Reports",
-    url: "/under-construction",
+    url: "#",
     icon: BarChart3,
   },
   {
     title: "Collateral",
-    url: "/under-construction",
+    url: "#",
     icon: FileText,
   },
   {
     title: "Access Configuration",
-    url: "/under-construction",
+    url: "#",
     icon: Lock,
   },
   {
     title: "Savings",
-    url: "/under-construction",
+    url: "#",
     icon: PiggyBank,
   },
   {
     title: "Expenses",
-    url: "/under-construction",
+    url: "#",
     icon: DollarSign,
   },
   {
     title: "E-signature",
-    url: "/under-construction",
+    url: "#",
     icon: PenTool,
   },
   {
     title: "Investor Accounts",
-    url: "/under-construction",
+    url: "#",
     icon: Briefcase,
   },
   {
     title: "Calendar",
-    url: "/under-construction",
+    url: "#",
     icon: Calendar,
   },
   {
     title: "Settings",
-    url: "/under-construction",
+    url: "#",
     icon: Settings,
   },
   {
     title: "Sign Out",
-    url: "/under-construction",
+    url: "#",
     icon: LogOut,
   },
 ];
@@ -120,7 +120,10 @@ export function AppSidebar() {
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem className="h-12 flex justify-center items-center shadow-sm shadow-gray-900 hover:bg-green-600" key={item.title}>
-                  <SidebarMenuButton className="hover:bg-green-600 hover:opacity-[91%] hover:text-white" asChild>
+                  <SidebarMenuButton 
+                    asChild
+                    className="hover:bg-green-600 hover:opacity-[91%] hover:text-white focus:outline-none focus:ring-0 active:bg-green-600 active:opacity-[91%] active:text-white"
+                  >
                     <a href={item.url} className="flex items-center gap-3 text-white">
                       <item.icon className="h-5 w-5" />
                       <span className="font-semibold text-md">{item.title}</span>

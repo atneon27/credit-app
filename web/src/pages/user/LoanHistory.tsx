@@ -4,7 +4,7 @@ import LoanList from "./LoanList";
 const LoanHistory = () => {
     return (
         <div className="w-full">
-            <div className="bg-white px-4 py-5">
+            <div className="bg-white px-4 py-5 rounded-md">
                 <div className="flex flex-row justify-between items-center pb-3">
                     <div className="text-lg font-semibold pl-2">
                         Applied Loans
