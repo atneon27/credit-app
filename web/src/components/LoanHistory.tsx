@@ -1,5 +1,5 @@
 import { Funnel, SortDesc } from "lucide-react";
-import LoanList from "./LoanList";
+import LoanList from "@/components/LoanList";
 
 const LoanHistory = () => {
     return (

@@ -6,6 +6,8 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
+import axios from "axios";
+import { useMutation } from "@tanstack/react-query";
 
 const formSchema = z.object({
     fullname: z.string().min(2, {
@@ -57,8 +59,34 @@ const LoanForm = () => {
         }
     })
 
+    const { mutate: submitForm } = useMutation({
+        mutationFn: async (data: z.infer<typeof formSchema>) => {
+            const response = await axios({
+                method: "POST",
+                url: `${import.meta.env.VITE_BACKEND_URL}/api/loan/new-form`,
+                data: {
+                    name: data.fullname,
+                    loanTenure: data.loan_tenure,
+                    loanAmount: data.loan_amount,
+                    reason: data.reason,
+                    employmentStatus: data.employment_status,
+                    employmentAddress: data.employment_address
+                }
+            })
+
+            return response.data;
+        }
+    })
+
     const onFormSubmit = (data: z.infer<typeof formSchema>) => {    
-        console.log(data);
+        submitForm(data, {
+            onSuccess: () => {
+                console.log("success");
+            },
+            onError: (err) => {
+                console.log(err);
+            }
+        });
     }
 
     return (

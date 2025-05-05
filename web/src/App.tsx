@@ -7,6 +7,9 @@ import { useEffect } from "react";
 import { useNavbar } from "./components/NavbarProvider";
 import NotFoundPage from "./components/NotFoundPage";
 import UnderConstruction from "./components/UnderConstruction";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 const App = () => {
   const navigate = useNavigate();
@@ -21,6 +24,7 @@ const App = () => {
   }, [profile])
 
   return (
+    <QueryClientProvider client={queryClient}>
       <Routes>
         <Route path="/" element={<User />} />
         <Route path="/verifier" element={<Verifier />} />
@@ -28,6 +32,7 @@ const App = () => {
         <Route path="*/under-construction" element={<UnderConstruction />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+    </QueryClientProvider>
   )
 }
 

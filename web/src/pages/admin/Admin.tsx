@@ -1,5 +1,5 @@
 import SummaryGrid from "@/components/SummaryGrid";
-import LoanHistory from "@/pages/user/LoanHistory";
+import LoanHistory from "@/components/LoanHistory";
 import DashboardAreaChart from "@/components/DashboardAreaChart";
 import DashboardBarChart from "@/components/DashboardBarChart";
 import HighlightedCard from "@/components/HighlightedCard";

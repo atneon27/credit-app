@@ -1,4 +1,4 @@
-import LoanHistory from "./LoanHistory";
+import LoanHistory from "@/components/LoanHistory";
 import UserCashInfo from "./UserCashInfo";
 import UserOptionsToggle from "./UserOptionsToggle";
 

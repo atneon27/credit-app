@@ -7,7 +7,6 @@ const router = Router();
 router.get('/', async (req: Request<{}, {}, LoanQueryType>, res: Response) => {
     // fetches all the loan if no id query is provided 
     // fetches a single loan if the laonId query is provided
-
     const parseResult = LoanQuerySchema.safeParse(req.query);
 
     if(!parseResult.success) {
