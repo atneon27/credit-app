@@ -8,6 +8,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import axios from "axios";
 import { useMutation } from "@tanstack/react-query";
+import { toast } from "sonner";
+import React from "react";
 
 const formSchema = z.object({
     fullname: z.string().min(2, {
@@ -46,7 +48,11 @@ const formSchema = z.object({
     }),
 })
 
-const LoanForm = () => {
+type LoanFormProps = {
+    setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const LoanForm = ({ setOpen }: LoanFormProps) => {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -81,12 +87,15 @@ const LoanForm = () => {
     const onFormSubmit = (data: z.infer<typeof formSchema>) => {    
         submitForm(data, {
             onSuccess: () => {
-                console.log("success");
+                toast.success("Loan Application Submitted Successfully");
             },
-            onError: (err) => {
-                console.log(err);
+            onError: () => {
+                toast.error("Loan Application Submittion Failed");
             }
         });
+        setInterval(() => {
+            setOpen(false);
+        }, 500)
     }
 
     return (

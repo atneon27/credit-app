@@ -1,3 +1,4 @@
+import { Toaster } from "sonner";
 import AppSidebar from "./AppSidebar";
 import Navbar from "./Navbar";  
 
@@ -13,6 +14,7 @@ const Layout = ({ children }: React.PropsWithChildren) => {
         <main className="transition-all duration-300 h-full overflow-y-auto p-4 bg-gray-100 flex-1">
           {children}
         </main>
+        <Toaster />
       </div>
     </div>
   );

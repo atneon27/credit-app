@@ -11,7 +11,7 @@ import { useQuery } from "@tanstack/react-query";
 import { EllipsisVertical } from "lucide-react";
 import Avatar from "react-avatar"
 import { ProfileType, useNavbar } from "./NavbarProvider";
-import { formatDistanceToNow } from 'date-fns'
+import { format, formatDistanceToNow } from 'date-fns'
 
 type LoanUserList = {
   id: number;
@@ -37,7 +37,7 @@ const UserAvatarAndInfo = ({ loan, profile }: UserAvatarProps) => {
   if (profile === "user") {
     return (
       <div className="flex flex-row items-center gap-5">
-        <Avatar size="44px" name={loan.officer?.name || "Unknown"} round color="grey" />
+        <Avatar size="44px" name={loan.officer?.name} round color="grey" />
         <div className="flex flex-col">
           <div className="text-sm font-semibold">{loan.officer?.name || "Unknown"}</div>
           <div className="text-xs text-gray-400">{formatDistanceToNow(new Date(loan.createdAt))}</div>
@@ -47,7 +47,7 @@ const UserAvatarAndInfo = ({ loan, profile }: UserAvatarProps) => {
   } else {
     return (
       <div className="flex flex-row items-center gap-5">
-        <Avatar size="44px" name={loan.user?.name || "Unknown"} round color="grey" />
+        <Avatar size="44px" name={loan.user?.name} round color="grey" />
         <div className="flex flex-col">
           <div className="text-sm font-semibold">{loan.feedback || "No feedback"}</div>
           <div className="text-xs text-gray-400">{formatDistanceToNow(new Date(loan.createdAt))}</div>
@@ -86,6 +86,22 @@ const LoanStatus = ({ currentStatus }: { currentStatus: string }) => {
   )
 }
 
+const DisplayDate = ({ date }: { date: string }) => {
+  const dateObj = new Date(date);
+  const formatedDate = format(dateObj, "MMMM d,yyyy-hh:mm a").split("-");
+
+  return (
+    <div className="flex flex-col">
+      <div className="text-md" style={{fontWeight: 400}}>
+        {formatedDate[0]}
+      </div>
+      <div className="text-xs text-gray-400 font-semibold pr-6">
+        {formatedDate[1]} 
+      </div>
+    </div>
+  )
+}
+
 const LoanList = () => {
   const { profile } = useNavbar();
   
@@ -98,7 +114,8 @@ const LoanList = () => {
       });
 
       return response.data
-    }
+    },
+    refetchInterval: 5000
   });
 
   if(isLoading) {
@@ -145,12 +162,19 @@ const LoanList = () => {
                   {data.loanAmount}
                 </div>
               ) : (
-                <div>
-                  {data.user?.name}
+                <div className="flex flex-col">
+                  <div className="text-md" style={{ fontWeight: 500 }}>
+                    {data.user?.name}
+                  </div>
+                  <div className="text-xs text-muted-foreground font-semibold pl-10">
+                    on {format(new Date(data.createdAt), "dd.MM.yyyy")}
+                  </div>
                 </div>
               )}
             </TableCell>
-            <TableCell className="text-end">{data.createdAt}</TableCell>
+            <TableCell className="text-end">
+              <DisplayDate date={data.createdAt} />
+            </TableCell>
             <TableCell>
               <LoanStatus currentStatus={data.currentStatus} />
             </TableCell>
