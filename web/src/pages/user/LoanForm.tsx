@@ -167,7 +167,7 @@ const LoanForm = ({ setOpen }: LoanFormProps) => {
                                     <Input 
                                         type="number" 
                                         className="py-5" 
-                                        placeholder="Loan Tenure (in months)" 
+                                        placeholder="Loan Amount Required (number)" 
                                         onChange={(e) => {
                                             const numericValue = parseFloat(e.target.value);
                                             field.onChange(isNaN(numericValue) ? undefined : numericValue);

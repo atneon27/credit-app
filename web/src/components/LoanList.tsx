@@ -96,7 +96,7 @@ const DisplayDate = ({ date }: { date: string }) => {
       <div className="text-md" style={{fontWeight: 400}}>
         {formatedDate[0]}
       </div>
-      <div className="text-xs text-gray-400 font-semibold pr-6">
+      <div className="text-xs text-gray-400 font-semibold pr-5">
         {formatedDate[1]} 
       </div>
     </div>
@@ -170,7 +170,7 @@ const LoanList = () => {
                   <div className="text-md" style={{ fontWeight: 500 }}>
                     {data.user?.name}
                   </div>
-                  <div className="text-xs text-muted-foreground font-semibold pl-10">
+                  <div className="text-xs text-slate-400 font-semibold">
                     on {format(new Date(data.createdAt), "dd.MM.yyyy")}
                   </div>
                 </div>
