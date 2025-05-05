@@ -24,12 +24,14 @@ const Verifier = () => {
                 chartTitle="Total Outstanding Loans - Monthly"
                 layerColor="#050ED6"
                 chartColor="#0378E3"
+                chartDataType={"one"}
             />
 
             <DashboardBarChart 
                 chartTitle="Total Repayments Collected - Weekly"
                 layerColor="#AB1A10"
                 chartColor="#A61B13"
+                chartDataType={"two"}
             />
         </div>
     );
