@@ -49,7 +49,7 @@ const SummaryGrid = ({ cols }: Props) => {
                 url: `${import.meta.env.VITE_BACKEND_URL}/api/loan/dashboard-summary?userType=${profile}`,
             });
 
-            return response.data
+            return response.data;
         },
     });
 
