@@ -19,6 +19,7 @@ const Admin = () => {
                 chartTitle="Total Outstanding Loans - Monthly"
                 layerColor="#050ED6"
                 chartColor="#0378E3"
+                chartDataType={"one"}
             />
 
             <div className="flex items-center justify-between gap-28">
@@ -43,6 +44,7 @@ const Admin = () => {
                 chartTitle="Total Repayments Collected - Weekly"
                 layerColor="#AB1A10"
                 chartColor="#A61B13"
+                chartDataType={"two"}
             />
         </div>
     );

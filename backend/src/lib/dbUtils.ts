@@ -1,5 +1,6 @@
+import { count } from "console";
 import prisma from "../lib/prisma.js";
-import { LoanFeedbackSchema, LoanQuerySchema, LoanQueryType, LoanRequestType, LoanFeedbackType } from "../types/types";
+import { LoanFeedbackSchema, LoanQuerySchema, LoanQueryType, LoanRequestType, LoanFeedbackType, SummaryQueryType } from "../types/types";
 
 const getLoans = async (data: LoanQueryType) => {
     let loans;
@@ -125,8 +126,80 @@ const submitForm = async (data: LoanRequestType) => {
     return loan.id;
 }
 
+type SummaryType = {
+    text: string;
+    value: number;
+    iconType: number
+}
+
+const getSummary = async (data: SummaryQueryType) => {
+    const countUsers = await prisma.user.count();
+    const countOfficers = await prisma.officer.count();
+    const countLoans = await prisma.loan.count();
+
+    const totalAmount = await prisma.loan.aggregate({
+        _sum: {
+            loanAmount: true
+        }
+    });
+
+    const totalAmt = totalAmount._sum.loanAmount;
+    const savings = Math.floor(totalAmt ?? 0 * 0.2)
+    const cashRecived = Math.floor(totalAmt ?? 0 * 0.6)
+
+    const result: SummaryType[] = [
+        {
+            text: "Active Users",
+            value: countUsers + countOfficers,
+            iconType: 1
+        }, 
+        {
+            text: "Borrowers",
+            value: countUsers,
+            iconType: 2
+        },
+        {
+            text: "Loans",
+            value: countLoans,
+            iconType: 3
+        },
+        {
+            text: "Cash Dispersed",
+            value: totalAmt ?? 0,
+            iconType: 4
+        }, 
+        {
+            text: "Savings",
+            value: savings,
+            iconType: 5
+        }, 
+        {
+            text: "Cash Recived",
+            value: cashRecived,
+            iconType: 6
+        }, 
+        {
+            text: "Repaid Loans", 
+            value: 10,
+            iconType: 7
+        }, 
+        {
+            text: "Other Accounts",
+            value: 10,
+            iconType: 8
+        },
+    ]
+
+    if(data.userType === "verifier") {
+        return result.slice(1, result.length - 1);
+    } 
+
+    return result;
+}
+
 export {
     getLoans,
     submitFeedback,
-    submitForm
+    submitForm,
+    getSummary
 }

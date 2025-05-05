@@ -1,6 +1,6 @@
 import express, { Router, Request, Response, response } from 'express';
-import { LoanQuerySchema, LoanRequestSchema, LoanFeedbackSchema, LoanQueryType, LoanRequestType, LoanFeedbackType } from '../types/types.js';
-import { getLoans, submitFeedback, submitForm } from '../lib/dbUtils.js';
+import { LoanQuerySchema, LoanRequestSchema, LoanFeedbackSchema, LoanQueryType, LoanRequestType, LoanFeedbackType, SummaryQuerySchema, SummaryQueryType } from '../types/types.js';
+import { getLoans, submitFeedback, submitForm, getSummary } from '../lib/dbUtils.js';
 
 const router = Router();
 
@@ -48,6 +48,36 @@ router.get('/', async (req: Request<{}, {}, LoanQueryType>, res: Response) => {
         });
     }
 });
+
+router.get('/dashboard-summary', async (req, res) => {
+    const parseResult = SummaryQuerySchema.safeParse(req.query);
+
+    if(!parseResult.success) {
+        res.status(400).json({
+            error: "Invalid Query Parameter Used",
+            detail: parseResult.error.issues
+        })
+        return;
+    }
+
+    const query: SummaryQueryType = parseResult.data;
+
+    try {
+        const data = await getSummary({
+            userType: query.userType
+        });
+
+        res.status(200).json({
+            summary: data
+        });
+        return;
+    } catch(err) {
+        res.status(500).json({
+            error: "Internal Server Error",
+            detail: err
+        });
+    }
+})
 
 router.put('/feedback', express.json(), async (req: Request, res: Response) => {
     // submit feedback

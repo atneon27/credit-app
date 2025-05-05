@@ -8,10 +8,10 @@ import {
 } from "@/components/ui/table"
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
-import { EllipsisVertical } from "lucide-react";
 import Avatar from "react-avatar"
 import { ProfileType, useNavbar } from "./NavbarProvider";
 import { format, formatDistanceToNow } from 'date-fns'
+import OptionsDialog from "./OptionsDialog";
 
 type LoanUserList = {
   id: number;
@@ -179,7 +179,7 @@ const LoanList = () => {
               <LoanStatus currentStatus={data.currentStatus} />
             </TableCell>
             <TableCell className="text-right">
-              <EllipsisVertical className="h-4 w-4 stroke-gray-400 cursor-pointer" />
+              <OptionsDialog />
             </TableCell>
           </TableRow>
         ))}

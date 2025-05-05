@@ -19,15 +19,22 @@ const LoanFeedbackSchema = z.object({
     feedback: z.string().min(5)
 })
 
+const SummaryQuerySchema = z.object({
+    userType: z.enum(["verifier", "admin"])
+})
+
 type LoanRequestType = z.infer<typeof LoanRequestSchema>
 type LoanQueryType = z.infer<typeof LoanQuerySchema>
 type LoanFeedbackType = z.infer<typeof LoanFeedbackSchema>
+type SummaryQueryType = z.infer<typeof SummaryQuerySchema>
 
 export {
     LoanRequestSchema,
     LoanQuerySchema,
     LoanFeedbackSchema,
+    SummaryQuerySchema,
     LoanRequestType,
     LoanQueryType,
-    LoanFeedbackType
+    LoanFeedbackType,
+    SummaryQueryType
 }
