@@ -32,24 +32,27 @@ const OptionsOthersForm = ({ setOpen }: OptionsDialogProps) => {
 
   const onFormSubmit = (data: z.infer<typeof formOtherSchema>) => {
     console.log(data)
+    setOpen(false)
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onFormSubmit)} className="space-y-8 p-10"></form>
-       <FormField
-          control={form.control}
-          name="status"
-          render={({ field }) => (
-              <FormItem>
-                  <FormLabel>Fullname as it appear on bank account</FormLabel>
-                  <FormControl>
-                      <Input className="py-5" placeholder="Fullname as it appear on bank account" {...field} />
-                  </FormControl>
-                  <FormMessage />
-              </FormItem>
-          )}
-      />
+      <form onSubmit={form.handleSubmit(onFormSubmit)} className="space-y-8 "></form>
+        <div>
+          <FormField
+              control={form.control}
+              name="status"
+              render={({ field }) => (
+                  <FormItem>
+                      <FormLabel>Update Loan Status</FormLabel>
+                      <FormControl>
+                          <Input className="py-5" placeholder="Fullname as it appear on bank account" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                  </FormItem>
+              )}
+          />
+        </div>
       <div className="flex justify-end">
           <Button className="cursor-pointer bg-green-500 hover:bg-green-600 font-semibold" type="submit">Submit</Button>
       </div>
@@ -67,24 +70,27 @@ const OptionsUserForm = ({ setOpen }: OptionsDialogProps) => {
 
   const onFormSubmit = (data: z.infer<typeof formUserSchema>) => {
     console.log(data)
+    setOpen(false)
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onFormSubmit)} className="space-y-8 p-10"></form>
-       <FormField
-          control={form.control}
-          name="feedback"
-          render={({ field }) => (
-              <FormItem>
-                  <FormLabel>Fullname as it appear on bank account</FormLabel>
-                  <FormControl>
-                      <Input className="py-5" placeholder="Fullname as it appear on bank account" {...field} />
-                  </FormControl>
-                  <FormMessage />
-              </FormItem>
-          )}
-      />
+      <form onSubmit={form.handleSubmit(onFormSubmit)} className="space-y-8"></form>
+        <div>
+          <FormField
+              control={form.control}
+              name="feedback"
+              render={({ field }) => (
+                  <FormItem>
+                      <FormLabel>Ask a question</FormLabel>
+                      <FormControl>
+                          <Input className="py-5" placeholder="Fullname as it appear on bank account" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                  </FormItem>
+              )}
+          />
+        </div>
       <div className="flex justify-end">
           <Button className="cursor-pointer bg-green-500 hover:bg-green-600 font-semibold" type="submit">Submit</Button>
       </div>
