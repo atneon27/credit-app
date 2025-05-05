@@ -29,8 +29,8 @@ model Officer {
 
 model Loan {
   id                String    @id @default(nanoid())
-  userId            String   
-  officerId         String    
+  userId            String
+  officerId         String
   loanTenure        Int
   loanAmount        Int
   reason            String
@@ -38,11 +38,11 @@ model Loan {
   employmentAddress String
   currentStatus     String    @default("pending")
   createdAt         DateTime  @default(now())
-  query             String    @default("Applied For Loan")
-  queryRaisedAt     DateTime?
+  feedback          String    @default("Applied For Loan")
+  feedbackRaisedAt  DateTime? @default(now())
 
-  officer           Officer   @relation(fields: [officerId], references: [id])
-  user              User      @relation(fields: [userId], references: [id])
+  officer Officer @relation(fields: [officerId], references: [id])
+  user    User    @relation(fields: [userId], references: [id])
 
   @@index([userId])
   @@index([officerId])

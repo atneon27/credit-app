@@ -1,13 +1,13 @@
 import prisma from "../lib/prisma.js";
-import { LoanQuerySchema, LoanQueryType, LoanRequestType } from "../types/types";
+import { LoanFeedbackSchema, LoanQuerySchema, LoanQueryType, LoanRequestType, LoanFeedbackType } from "../types/types";
 
-const getLoans = async ({ userType, id }: LoanQueryType) => {
+const getLoans = async (data: LoanQueryType) => {
     let loans;
 
-    if(id !== undefined) {
+    if(data.id) {
         loans = await prisma.loan.findUnique({
             where: {
-                id:id 
+                id:data.id
             }, 
             select: {
                 id: true,
@@ -30,8 +30,8 @@ const getLoans = async ({ userType, id }: LoanQueryType) => {
                 createdAt: true
             }
         });
-    } else if(userType !== undefined) {
-        if(userType === "user") {
+    } else if(data.userType) {
+        if(data.userType === "user") {
             loans = await prisma.loan.findMany({
                 select: {
                     id: true,
@@ -45,7 +45,7 @@ const getLoans = async ({ userType, id }: LoanQueryType) => {
                     createdAt: true
                 }
             });
-        } else if(userType === "verifier" || userType === "admin") {
+        } else if(data.userType === "verifier" || data.userType === "admin") {
             loans = await prisma.loan.findMany({
                 select: {
                     id: true,
@@ -57,14 +57,32 @@ const getLoans = async ({ userType, id }: LoanQueryType) => {
                     loanAmount: true,
                     currentStatus: true,
                     createdAt: true,
-                    query: true,
-                    queryRaisedAt: true
+                    feedback: true,
+                    feedbackRaisedAt: true
                 }
             });
         }
     } 
-    
+
     return loans;
+}
+
+const submitFeedback = async (data: LoanFeedbackType) => {
+    try {
+        const loan = await prisma.loan.update({
+            where: {
+                id: data.id
+            }, 
+            data: {
+                feedback: data.feedback,
+                feedbackRaisedAt: new Date()
+            }
+        })
+
+        return loan.id;
+    } catch(err) {
+        throw new Error("Error occured while updating loan feedback");
+    }
 }
 
 const submitForm = async (data: LoanRequestType) => {
@@ -109,5 +127,6 @@ const submitForm = async (data: LoanRequestType) => {
 
 export {
     getLoans,
+    submitFeedback,
     submitForm
 }

@@ -1,6 +1,6 @@
-import express, { Router, Request, Response } from 'express';
-import { LoanQuerySchema, LoanRequestSchema, LoanQueryType, LoanRequestType } from '../types/types.js';
-import { getLoans, submitForm } from '../lib/dbUtils.js';
+import express, { Router, Request, Response, response } from 'express';
+import { LoanQuerySchema, LoanRequestSchema, LoanFeedbackSchema, LoanQueryType, LoanRequestType, LoanFeedbackType } from '../types/types.js';
+import { getLoans, submitFeedback, submitForm } from '../lib/dbUtils.js';
 
 const router = Router();
 
@@ -48,9 +48,39 @@ router.get('/', async (req: Request<{}, {}, LoanQueryType>, res: Response) => {
             detail: err
         });
     }
-})
+});
+
+router.put('/feedback', express.json(), async (req: Request, res: Response) => {
+    // submit feedback
+    const parseResult = LoanFeedbackSchema.safeParse(req.body);
+
+    if(!parseResult.success) {
+        res.status(400).json({
+            error: "Invalid Request Body",
+            detail: parseResult.error.issues
+        })
+        return;
+    }
+
+    const parsedBody: LoanFeedbackType = parseResult.data;
+
+    try {
+        const id = await submitFeedback(parsedBody);
+
+        res.status(200).json({
+            msg: "Feedback Submitted Successfully",
+            id:id 
+        })
+    } catch(err) {
+        res.status(500).json({
+            error: "Internal Server Error",
+            detail: err
+        })
+    }
+});
 
 router.post('/new-form', express.json(), async (req: Request<{}, {}, unknown>, res: Response) => {
+    // submit a new form
     const parseResult = LoanRequestSchema.safeParse(req.body);
 
     if(!parseResult.success) {
@@ -75,6 +105,6 @@ router.post('/new-form', express.json(), async (req: Request<{}, {}, unknown>, r
             error: "Internal Server Error",
         })
     }
-})
+});
 
 export default router;

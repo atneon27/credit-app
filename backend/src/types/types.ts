@@ -14,12 +14,20 @@ const LoanQuerySchema = z.object({
     id: z.optional(z.string())
 })
 
+const LoanFeedbackSchema = z.object({
+    id: z.string(),
+    feedback: z.string().min(5)
+})
+
 type LoanRequestType = z.infer<typeof LoanRequestSchema>
 type LoanQueryType = z.infer<typeof LoanQuerySchema>
+type LoanFeedbackType = z.infer<typeof LoanFeedbackSchema>
 
 export {
     LoanRequestSchema,
     LoanQuerySchema,
+    LoanFeedbackSchema,
     LoanRequestType,
-    LoanQueryType
+    LoanQueryType,
+    LoanFeedbackType
 }
