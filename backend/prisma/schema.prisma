@@ -1,6 +1,11 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
 generator client {
   provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
 }
 
 datasource db {
@@ -9,32 +14,35 @@ datasource db {
 }
 
 model User {
-  id    String @id @default(nanoid())
-  name  String
+  id   String @id @default(nanoid())
+  name String @unique
+
   loans Loan[]
 }
 
 model Officer {
-  id    String @id @default(nanoid())
-  name  String
+  id   String @id @default(nanoid())
+  name String @unique
+
   loans Loan[]
 }
 
 model Loan {
-  id                String   @id @default(nanoid())
-  userId            String
-  officerId         String
+  id                String    @id @default(nanoid())
+  userId            String   
+  officerId         String    
   loanTenure        Int
-  reason            String
   loanAmount        Int
+  reason            String
   employmentStatus  String
-  currentStatus     String
-  createdAt         DateTime @default(now())
-  query             String
-  queryRaisedAt     DateTime
   employmentAddress String
-  officer           Officer  @relation(fields: [officerId], references: [id])
-  user              User     @relation(fields: [userId], references: [id])
+  currentStatus     String    @default("pending")
+  createdAt         DateTime  @default(now())
+  query             String    @default("Applied For Loan")
+  queryRaisedAt     DateTime?
+
+  officer           Officer   @relation(fields: [officerId], references: [id])
+  user              User      @relation(fields: [userId], references: [id])
 
   @@index([userId])
   @@index([officerId])
