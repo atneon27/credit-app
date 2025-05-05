@@ -3,6 +3,7 @@ import SummaryTile from "./SummaryTile";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useNavbar } from "./NavbarProvider";
+import { LoaderCircle } from "lucide-react";
 
 type Props = {
     rows: number;
@@ -54,7 +55,12 @@ const SummaryGrid = ({ cols }: Props) => {
     });
 
     if(isLoading) {
-        return <div>Loading...</div>
+        return (
+        <div className="flex felx-row justify-center items-center gap-2">
+            <LoaderCircle className="h-5 w-5 animate-spin text-muted-foreground" />
+            Loading ...
+        </div>
+        )
     }
 
     const summary = (data as any)?.summary || [];

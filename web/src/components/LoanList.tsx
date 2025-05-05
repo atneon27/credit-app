@@ -12,6 +12,7 @@ import Avatar from "react-avatar"
 import { ProfileType, useNavbar } from "./NavbarProvider";
 import { format, formatDistanceToNow } from 'date-fns'
 import OptionsDialog from "./OptionsDialog";
+import { LoaderCircle } from "lucide-react";
 
 type LoanUserList = {
   id: number;
@@ -120,7 +121,10 @@ const LoanList = () => {
 
   if(isLoading) {
     return (
-      <div>Loading ...</div>
+      <div className="flex felx-row justify-center items-center gap-2">
+        <LoaderCircle className="h-5 w-5 animate-spin text-muted-foreground" />
+        Loading ...
+      </div>
     )
   }
 
