@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id    String @id @default(nanoid())
+  name  String
+  loans Loan[]
+}
+
+model Officer {
+  id    String @id @default(nanoid())
+  name  String
+  loans Loan[]
+}
+
+model Loan {
+  id                String   @id @default(nanoid())
+  userId            String
+  officerId         String
+  loanTenure        Int
+  reason            String
+  loanAmount        Int
+  employmentStatus  String
+  currentStatus     String
+  createdAt         DateTime @default(now())
+  query             String
+  queryRaisedAt     DateTime
+  employmentAddress String
+  officer           Officer  @relation(fields: [officerId], references: [id])
+  user              User     @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@index([officerId])
+}
